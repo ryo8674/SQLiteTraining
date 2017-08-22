@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Exercise15</string>
+    <string name="member_info">会員登録情報</string>
+    <string name="register">登録</string>
+    <string name="confirm">確認</string>
+    <string name="determine">確定</string>
+    <string name="name">名前　</string>
+    <string name="gender">性別</string>
+    <string name="man">男性</string>
+    <string name="woman">女性</string>
+    <string name="mail">メール</string>
+    <string name="mail_magazine">メルマガ</string>
+    <string name="receive">受け取る</string>
+    <string name="hint">入力してください</string>
+    <string name="edit">編集</string>
+</resources>
