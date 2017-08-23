@@ -13,6 +13,7 @@ class MemberDto {
     private String gender;
     private String mailAddress;
     private String mailMagazine;
+    private String address;
 
     /**
      * 空のコンストラクタ
@@ -108,5 +109,23 @@ class MemberDto {
      */
     void setMailMagazine(String mailMagazine) {
         this.mailMagazine = mailMagazine;
+    }
+
+    /**
+     * 住所を取得する
+     *
+     * @return address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * 住所を設定する
+     *
+     * @param address address
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

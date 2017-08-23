@@ -20,7 +20,7 @@ class MemberDatabaseHelper extends SQLiteOpenHelper {
     /**
      * DB Version
      */
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
 
     /**
      * テーブルを作成するSQL
@@ -37,7 +37,7 @@ class MemberDatabaseHelper extends SQLiteOpenHelper {
      */
     private static final String DROP_TABLE_SQL = "drop table if exists member";
 
-//    private static final String ALTER_COLUMN_SQL = "alter table member add mailmaga text";
+    private static final String ALTER_COLUMN_SQL = "alter table member add residence text";
 
     /**
      * コンストラクタ
@@ -71,7 +71,7 @@ class MemberDatabaseHelper extends SQLiteOpenHelper {
         if (newVersion != oldVersion) {
             sqLiteDatabase.execSQL(DROP_TABLE_SQL);
             onCreate(sqLiteDatabase);
-//            sqLiteDatabase.execSQL(ALTER_COLUMN_SQL);
+            sqLiteDatabase.execSQL(ALTER_COLUMN_SQL);
         }
     }
 }

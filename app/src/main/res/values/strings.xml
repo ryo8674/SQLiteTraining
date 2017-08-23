@@ -10,6 +10,7 @@
     <string name="woman">女性</string>
     <string name="mail">メール</string>
     <string name="mail_magazine">メルマガ</string>
+    <string name="address">住所</string>
     <string name="receive">受け取る</string>
     <string name="hint">入力してください</string>
     <string name="edit">編集</string>

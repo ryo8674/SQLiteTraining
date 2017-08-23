@@ -51,6 +51,7 @@ public class DatabaseEditActivity extends AppCompatActivity {
         RadioGroup radioGender = (RadioGroup) findViewById(R.id.radio_gender);
         final EditText editMailAddress = (EditText) findViewById(R.id.edit_mail);
         CheckBox checkMagazine = (CheckBox) findViewById(R.id.checkbox);
+        final EditText editAddress = (EditText) findViewById(R.id.edit_address);
 
         // 性別選択
         radioGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -67,6 +68,7 @@ public class DatabaseEditActivity extends AppCompatActivity {
             }
         });
 
+        received = NOT_RECEIVED_MESSAGE;
         // メルマガの受け取り可否選択
         checkMagazine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -98,14 +100,15 @@ public class DatabaseEditActivity extends AppCompatActivity {
                 memberDto.setGender(gender);
                 memberDto.setMailAddress(editMailAddress.getText().toString());
                 memberDto.setMailMagazine(received);
+                memberDto.setAddress(editAddress.getText().toString());
 
                 //トランザクション開始
                 db.beginTransaction();
 
-                int tmpMemberId = getIntent().getIntExtra(ID_KEY, DEFAULT_VALUE);
+                int memberId = getIntent().getIntExtra(ID_KEY, DEFAULT_VALUE);
                 try {
-                    if (tmpMemberId != -1) {
-                        memberDao.update(tmpMemberId, memberDto);
+                    if (memberId != DEFAULT_VALUE) {
+                        memberDao.update(memberId, memberDto);
 
                     } else {
                         memberDao.insert(memberDto);

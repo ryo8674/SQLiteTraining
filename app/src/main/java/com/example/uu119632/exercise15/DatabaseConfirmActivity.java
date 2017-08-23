@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,6 +32,7 @@ public class DatabaseConfirmActivity extends AppCompatActivity {
         TextView textGender = (TextView) findViewById(R.id.text_gender);
         TextView textMailAddress = (TextView) findViewById(R.id.text_mail);
         TextView textMagazine = (TextView) findViewById(R.id.text_mail_magazine);
+        TextView textAddress = (TextView) findViewById(R.id.text_address);
 
         MemberDatabaseHelper memberDatabaseHelper = new MemberDatabaseHelper(this);
         SQLiteDatabase db = memberDatabaseHelper.getReadableDatabase();
@@ -40,18 +40,16 @@ public class DatabaseConfirmActivity extends AppCompatActivity {
         final MemberDao memberDao = new MemberDao(db);
         MemberDto memberDto = new MemberDto();
 
+        // 最も新しいIDのデータを読み込み
         for (MemberDto dto : memberDao.findAll()) {
-//            memberDto = dto;
-            Log.d("size", "userID:" + dto.getId());
-            Log.d("size", "userName:" + dto.getName());
+            memberDto = dto;
         }
-        memberDto = memberDao.findById(memberDao.findAll().size());
+
         textName.setText(memberDto.getName());
         textGender.setText(memberDto.getGender());
         textMailAddress.setText(memberDto.getMailAddress());
         textMagazine.setText(memberDto.getMailMagazine());
-
-        Log.d("size", "DBSize:" + String.valueOf(memberDao.findAll().size()));
+        textAddress.setText(memberDto.getAddress());
 
         // 編集ボタン押下時の処理
         final MemberDto finalMemberDto = memberDto;

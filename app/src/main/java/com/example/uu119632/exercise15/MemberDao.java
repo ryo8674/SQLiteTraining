@@ -22,7 +22,8 @@ class MemberDao {
     private static final String COLUMN_GENDER = "seibetsu";
     private static final String COLUMN_MAIL_ADDRESS = "address";
     private static final String COLUMN_MAIL_MAGAZINE = "mailmaga";
-    private static final String[] COLUMNS = {COLUMN_ID, COLUMN_NAME, COLUMN_GENDER, COLUMN_MAIL_ADDRESS, COLUMN_MAIL_MAGAZINE};
+    private static final String COLUMN_ADDRESS = "residence";
+    private static final String[] COLUMNS = {COLUMN_ID, COLUMN_NAME, COLUMN_GENDER, COLUMN_MAIL_ADDRESS, COLUMN_MAIL_MAGAZINE, COLUMN_ADDRESS};
 
     private final SQLiteDatabase db;
 
@@ -46,6 +47,7 @@ class MemberDao {
         values.put(COLUMN_GENDER, member.getGender());
         values.put(COLUMN_MAIL_ADDRESS, member.getMailAddress());
         values.put(COLUMN_MAIL_MAGAZINE, member.getMailMagazine());
+        values.put(COLUMN_ADDRESS, member.getAddress());
 
         db.insert(TABLE_NAME, null, values);
     }
@@ -62,6 +64,7 @@ class MemberDao {
         values.put(COLUMN_GENDER, member.getGender());
         values.put(COLUMN_MAIL_ADDRESS, member.getMailAddress());
         values.put(COLUMN_MAIL_MAGAZINE, member.getMailMagazine());
+        values.put(COLUMN_ADDRESS, member.getAddress());
         String whereClause = SELECTION + id;
 
         db.update(TABLE_NAME, values, whereClause, null);
@@ -84,40 +87,11 @@ class MemberDao {
             member.setGender(cursor.getString(2));
             member.setMailAddress(cursor.getString(3));
             member.setMailMagazine(cursor.getString(4));
+            member.setAddress(cursor.getString(5));
+
             list.add(member);
         }
         return list;
-    }
-
-    /**
-     * 特定レコードの検索を行う
-     *
-     * @param id id
-     * @return 検索結果
-     */
-    MemberDto findById(int id) {
-        String selection = SELECTION + id;
-        Cursor cursor = db.query(TABLE_NAME, COLUMNS, selection, null, null, null, null);
-        cursor.moveToNext();
-        MemberDto member = new MemberDto();
-
-        member.setId(cursor.getInt(0));
-        member.setName(cursor.getString(1));
-        member.setGender(cursor.getString(2));
-        member.setMailAddress(cursor.getString(3));
-        member.setMailMagazine(cursor.getString(4));
-        cursor.close();
-        return member;
-    }
-
-    /**
-     * 特定レコードを削除する
-     *
-     * @param id id
-     * @return 削除されたレコード数
-     */
-    int delete(int id) {
-        return db.delete(TABLE_NAME, SELECTION + id, null);
     }
 
 }
